@@ -16,7 +16,7 @@ export default {
   },
   methods:{
     clickMethod(){
-     
+
     }
   },
   computed:{
@@ -25,12 +25,12 @@ export default {
     }
   },
   created(){
-   
+
   },
   mounted(){
 
   }
- 
+
 }
 </script>
 

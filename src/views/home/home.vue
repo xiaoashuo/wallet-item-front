@@ -3,40 +3,31 @@
           <nav-bar class="home-nav-bar">
               <div slot="nav-bar-center">首页</div>
           </nav-bar>
-          <div class="swiper-content">
-              <swiper ref="mySwiper" :options="swiperOptions">
-                  <swiper-slide  :key="banner" v-for=" banner in banners">
-                       <img :src="banner"/>
-                   </swiper-slide>
-                 
-                  <div class="swiper-pagination" ></div>
-              </swiper>
-          </div>
+          <home-swiper :banners="banners"></home-swiper>
+          <notification></notification>
+          <home-lists></home-lists>
+
    </div>
 </template>
 <script>
 import NavBar from '@/components/common/navbar/NavBar'
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-
+import Notification from "../../components/common/notification/Notification";
+import HomeSwiper from "./childComps/HomeSwiper";
+import HomeLists from "./childComps/HomeLists";
 import {getGasInfo} from '@/network/token'
-import 'swiper/swiper-bundle.css'
 
 export default {
   name: "home",
   components:{
       NavBar,
-      Swiper,
-      SwiperSlide
+      HomeSwiper,
+      HomeLists,
+    Notification
   },
   data () {
     return {
-        banners: [ require('@/assets/img/img1.jpg'),require('@/assets/img/img2.jpg'), require('@/assets/img/img3.jpg') ],       
-        swiperOptions: {
-            autoplay: 5000,
-            pagination: {
-                el: '.swiper-pagination'
-            }
-        }
+        banners: [ require('@/assets/img/img1.jpg'),require('@/assets/img/img2.jpg'), require('@/assets/img/img3.jpg') ],
+
     };
   },
   created(){
@@ -69,9 +60,5 @@ export default {
     background-color: var(--color-blue);
   }
 
-  .swiper-content {
-      border: 1px solid red;
-      height: 200px;
-  }
 
 </style>
