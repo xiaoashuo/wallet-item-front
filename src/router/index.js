@@ -72,11 +72,7 @@ const routes = [
     component: NOT_FOUND
   }
 ]
-//2.创建router实例
-const router = new VueRouter({
-  mode: "history",
-  routes
-})
+
 // router.beforeEach((to,from,next)=>{
 //   if (to.path==='/login'){
 //     next()
@@ -90,7 +86,18 @@ const router = new VueRouter({
 //     }
 //   }
 // })
+//2.创建router实例
 
+const createRouter = () => new VueRouter({
+  mode: "history",
+  routes
+})
+const router = createRouter()
+
+export function resetRouter () {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // the relevant part
+}
 router.beforeEach((to,from,next)=>{
   const token=getToken();
   if (to.path==='/login'){

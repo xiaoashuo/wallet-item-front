@@ -37,6 +37,7 @@ import GridViewList from "./childComps/GridViewList";
 import ProfileLists from "./childComps/ProfileLists";
 import Scroll from "../../components/common/scroll/Scroll";
 import {removeToken} from "../../network/auth";
+
 export default {
   name: "profile",
   components:{
@@ -64,6 +65,8 @@ export default {
       removeToken()
       this.$store.dispatch("setWalletAddress",'')
       this.$store.dispatch("setUserInfo",{})
+
+    //  location.reload()
       this.$router.push("/login")
     }
   }

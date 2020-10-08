@@ -66,7 +66,8 @@
           // console.log(data);//{name:'xxx', age:xx }
          deployContract(formData).then(res=>{
            if (res.code && res.code===200){
-
+              this.$toast.showToast("合约正在部署中,查看合约列表")
+              this.$router.back();
            }else{
              this.$toast.showToast(res.msg)
            }

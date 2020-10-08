@@ -24,6 +24,7 @@ import {setToken} from "../../network/auth";
 import {mapActions} from 'vuex'
 import {SET_WALLET_ADDRESS, SET_USER_INFO} from "../../store/mutation-type";
 
+
 export default {
   name: "Login",
   data () {
@@ -89,6 +90,7 @@ export default {
         //设置用户信息
         this.setUserInfo(result.data.user)
         this.$toast.showToast("登录成功",500)
+
           setTimeout(function(){
             _this.$router.push("/home")
           },1500)

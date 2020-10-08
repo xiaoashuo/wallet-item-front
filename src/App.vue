@@ -18,7 +18,7 @@ export default {
   },
   data(){
     return{
-      cacheView:['home','ContractList','Detail','WalletList']
+      cacheView:[]
     }
   },
 

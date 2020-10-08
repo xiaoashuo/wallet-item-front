@@ -24,7 +24,7 @@ export  function request(config) {
     //公共url前缀(接口)
     baseURL: '/api',
     //超时时间
-    timeout: 10000
+    timeout: 30000
   });
       // 2. axios拦截器
       //请求拦截器

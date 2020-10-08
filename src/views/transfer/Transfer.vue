@@ -36,6 +36,9 @@
     <div class="transfer-miner-fee">
        矿工费: <input type="number" placeholder="请输入矿工费" v-model="minerFee"> GWEI
     </div>
+    <div class="transfer-miner-fee-estimate">
+       <span>{{estimateFee|| 0}}</span> GWEI
+    </div>
     <div class="transfer-btn">
       <button @click="transferMoney">转账</button>
     </div>
@@ -44,7 +47,11 @@
 
 <script>
    import NavBar from "../../components/common/navbar/NavBar";
-    export default {
+   import {getGasInfo, transferMoney,transferTokenMoney} from "../../network/token";
+   import {isEmpty} from "../../utils/validation";
+
+
+   export default {
         name: "Transfer",
         components:{
           NavBar
@@ -53,12 +60,49 @@
           return{
             transferVal: '',
             transferAddress: '',
-            minerFee: ''
+            minerFee: '',
+            estimateFee: ''
           }
         },
-        methods:{
-          transferMoney(){
+      created() {
+          this.getEstimateFee()
+      },
+      methods:{
+          async getEstimateFee(){
+            const res=await getGasInfo();
+            if (res.code&&res.code===200){
+              this.estimateFee=res.data.gasPrice;
+            }else{
+              this.$toast.showToast("预估矿工费失败"+res.msg)
+            }
 
+          },
+          async transferMoney(){
+              if (isEmpty(this.transferVal)||isEmpty(this.transferAddress)||isEmpty(this.estimateFee)){
+                this.$toast.showToast("输入内容不能为空")
+                return;
+              }
+              //判断是本币转账 还是代币转账
+            const  contractAddress=this.$route.query.address;
+            const  walletAddress = this.$store.getters.getWalletAddress;
+            if (isEmpty(contractAddress)){
+              //执行本币转账
+              const formData = new FormData();
+              formData.append("fromAddress",walletAddress)
+              formData.append("toAddress",this.transferAddress)
+              formData.append("amount",this.transferVal)
+              const res =await transferMoney(formData);
+              if (res.code &&res.code===200){
+                console.log(res)
+                this.$toast.showToast("转账已发起")
+                this.$router.back()
+              }else{
+                this.$toast.showToast(res.msg)
+              }
+            }  else{
+              //执行代币转账
+
+            }
           }
         }
 
@@ -150,5 +194,9 @@
     width: 80%;
     background-color: #03a9f4;
     color: white;
+  }
+  .transfer-miner-fee-estimate{
+    width: 100%;
+    text-align: center;
   }
 </style>
