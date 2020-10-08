@@ -5,24 +5,29 @@
           </nav-bar>
           <home-swiper :banners="banners"></home-swiper>
           <notification></notification>
+     <scroll  class="content" ref="scroll">
           <home-lists></home-lists>
+     </scroll>
 
    </div>
 </template>
 <script>
+import Scroll from "../../components/common/scroll/Scroll";
 import NavBar from '@/components/common/navbar/NavBar'
 import Notification from "../../components/common/notification/Notification";
 import HomeSwiper from "./childComps/HomeSwiper";
 import HomeLists from "./childComps/HomeLists";
-import {getGasInfo} from '@/network/token'
 
+import {SET_WALLET_ADDRESS} from "../../store/mutation-type";
+import {mapActions} from 'vuex'
 export default {
   name: "home",
   components:{
       NavBar,
       HomeSwiper,
       HomeLists,
-    Notification
+    Notification,
+    Scroll
   },
   data () {
     return {
@@ -31,8 +36,9 @@ export default {
     };
   },
   created(){
-      console.log("home主页创建")
-      console.log(getGasInfo());
+      this.setWalletAddress("0x146d512168d6d0602c19ff63257cdf8cb1811be0")
+
+
   },
   computed:{
       swiper(){
@@ -43,6 +49,7 @@ export default {
       }
   },
   methods:{
+       ...mapActions([SET_WALLET_ADDRESS]),
       	iconURL(item) {
 				return require('@/assets/img/' + item.icon)
       }
@@ -51,14 +58,22 @@ export default {
 </script>
 <style scoped>
 #home {
-    margin-bottom: 49px;
-    overflow: hidden;
+  height: 100vh;
+  position: relative;
+  margin-bottom: 49px;
   }
 
   .home-nav-bar {
     color: white;
     background-color: var(--color-blue);
   }
+.content{
+  height: calc(100% - 44px - 40px - 200px - 55px - 10px);
+  overflow: hidden;
+}
+.home-list-content{
+  height: 100%;
+}
 
 
 </style>

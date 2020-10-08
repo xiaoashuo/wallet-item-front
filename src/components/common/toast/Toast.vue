@@ -34,19 +34,19 @@ export default {
     right: 0;
     left: 0;
     /* height: calc(100% - 44px - 49px); */
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    /*height: 100%;*/
+    /*background-color: rgba(0, 0, 0, 0.7);*/
     z-index: 9999;
   }
 
   #toast .msg {
     color: white;
     display: block;
-    width: 50%;
+    width: 60%;
     height: 26px;
     line-height: 26px;
     text-align: center;
     border-radius: 7px;
-    background-image: linear-gradient(90deg, rgba(7, 153, 146, .8), rgba(96, 163, 188, .7));
+    background-image: linear-gradient(90deg, rgba(94, 106, 105, 0.8), rgba(18, 19, 19, 0.7));
   }
 </style>

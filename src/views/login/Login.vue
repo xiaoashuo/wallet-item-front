@@ -1,21 +1,28 @@
 <template>
    <div id="login">
-        <div class="login-username">
-            <label>用户名</label>
-              <input v-focus v-model="username" placeholder="请输入用户名"/>
-        </div>
-      <div class="login-password">
-            <label>密码</label>
-              <input type="password"  v-model="password" placeholder="请输入密码"/>
-      </div>
-      <div class="login-button" @click="startLogin">
-          <button>登录</button>
-      </div>
+       <div class="loginLogo">
+         <img src="~/assets/logo.png" alt="">
+       </div>
+       <div class="login-content">
+         <div class="login-username">
+           <input v-focus v-model="username" placeholder="请输入用户名"/>
+         </div>
+         <div class="login-password">
+           <input type="password"  v-model="password" placeholder="请输入密码"/>
+         </div>
+         <div class="login-button" @click="startLogin">
+           <button>登录</button>
+         </div>
+       </div>
+
    </div>
 </template>
 <script>
-import {userLogin} from '@/network/user'
+import {userLogin,getUserInfo} from '@/network/user'
 import {isRangeLength,isEmpty} from '@/utils/validation'
+import {mapActions} from 'vuex'
+import {SET_WALLET_ADDRESS, SET_USER_INFO, SET_TOKEN} from "../../store/mutation-type";
+
 export default {
   name: "Login",
   data () {
@@ -31,43 +38,125 @@ export default {
          }
      }
   },
+  computed:{
+
+  },
   methods:{
+    ...mapActions([SET_WALLET_ADDRESS,SET_USER_INFO,SET_TOKEN]),
       validateParams(data){
          return isRangeLength(data,5,10)
       },
-      startLogin(){
+      async startLogin(){
           if(isEmpty(this.username)||isEmpty(this.password)){
               this.$toast.showToast('用户名或密码不能为空',500)
               return;
           }
-  
+
           if(!this.validateParams(this.username)||!this.validateParams(this.password)){
               this.$toast.showToast('用户名或密码必须在5-10位',500)
               return ;
          }
-     
-         const form = new FormData()    
+
+         const form = new FormData()
          form.append("username",this.username);
          form.append("password",this.password)
           let _this=this;
-          userLogin(form).then(res=>{
-           
-             if(res.code!=""&&res.code==200){
-                this.$toast.showToast("登录成功",500)
-                setTimeout(function(){
-                   _this.$router.push("/home")
-                },1500)
-                 
-             }else{
-                 this.$toast.showToast("用户名或密码不正确",500)
-             }
-          }).catch(err=>{
-              this.$toast.showToast("登录失败，请联系客服",500)
-          })
-         
+
+          const res = await userLogin(form);
+
+          if (!res.code||res.code!==200){
+            this.$toast.showToast("用户名或密码不正确",500)
+            return
+          }
+          const result=await getUserInfo()
+          if (!result.code||result.code!==200){
+            this.$toast.showToast(result.msg,500)
+            return
+          }
+
+        let wallets=result.data.wallet;
+          //设置token
+        this.setToken(res.data.token);
+          //设置钱包地址
+        this.setWalletAddress(wallets[0].address)
+        //设置用户信息
+        this.setUserInfo(result.data.user)
+        this.$toast.showToast("登录成功",500)
+          setTimeout(function(){
+            _this.$router.push("/home")
+          },1500)
+
+
       }
   }
 }
 </script>
 <style scoped>
+  #login{
+    height: 100vh;
+    position: relative;
+  }
+  .loginLogo{
+    margin-top: 20%;
+    text-align: center;
+  }
+.login-content{
+  margin-top: 10px;
+
+}
+  .login-username{
+    text-align: center;
+  }
+.login-username input{
+  width: 80%;
+  height: 50px;
+  line-height: 48px \9;
+  padding-left: 10px;
+  border: 1px #d9d9d9 solid;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  outline: none;
+}
+  .login-password{
+    text-align: center;
+    margin-top: 10%;
+  }
+.login-password input{
+  width: 80%;
+  height: 50px;
+  line-height: 48px \9;
+  padding-left: 10px;
+  border: 1px #d9d9d9 solid;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  outline: none;
+}
+  .login-button{
+    margin-top: 10%;
+    text-align: center;
+  }
+  .login-button button{
+    width: 80%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    border: 0;
+    background-color: #03a9f4;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+  }
+
 </style>

@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-     <keep-alive>
+     <keep-alive :include="cacheView">
       <router-view/>
      </keep-alive>
-     <main-tab-bar v-if="!isLogin" ></main-tab-bar>
+
+     <main-tab-bar v-show="isShow" ></main-tab-bar>
   </div>
 </template>
 
@@ -14,14 +15,20 @@ export default {
   components:{
      MainTabBar
   },
+  data(){
+    return{
+      cacheView:['home','ContractList','Detail','WalletList']
+    }
+  },
   methods:{
     clickMethod(){
 
     }
   },
   computed:{
-    isLogin(){
-      return this.$route.path.indexOf('/login')!=-1;
+    isShow(){
+
+      return this.$route.path.indexOf('/home')!=-1||this.$route.path.indexOf('/profile')!=-1;
     }
   },
   created(){

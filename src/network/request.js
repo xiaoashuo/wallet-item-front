@@ -11,32 +11,35 @@ import Axios from 'axios'
 //     });
 //     return instance;
 //   }
-const $instance=Axios.create({
+// const $instance=Axios.create({
+//     //公共url前缀(接口)
+//     baseURL: '/api',
+//     //超时时间
+//     timeout: 10000
+// })
+export  function request(config) {
+      //1.创建axios实列
+  const instance = Axios.create({
     //公共url前缀(接口)
     baseURL: '/api',
     //超时时间
     timeout: 10000
-}) 
-export  function request(config) {
-      //1.创建axios实列
-      // const instance= createBaseInstance();
+  });
       // 2. axios拦截器
       //请求拦截器
-      $instance.interceptors.request.use(config=>{
-        console.log(config)
+      instance.interceptors.request.use(config=>{
         return config;
       },err=>{
         return Promise.reject(error)
       });
       //响应拦截器
-      $instance.interceptors.response.use(res=>{
-        console.log(res)
+      instance.interceptors.response.use(res=>{
          return res.data;
       },err=>{
        return  Promise.reject(error)
       });
       //3.发送真正的网络请求
-      return $instance(config)
+      return instance(config)
 }
 
 

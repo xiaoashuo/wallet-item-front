@@ -8,3 +8,14 @@ export const getGasInfo=async ()=>{
             url: "/token/gasInfo"
         })
 }
+
+export function getTokenBalance(contractAddress,walletAddress) {
+   return request({
+     url: '/token/balance',
+     method:'get',
+     params:{
+       "address": walletAddress,
+       "contractAddress": contractAddress
+     }
+   })
+}

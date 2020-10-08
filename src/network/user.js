@@ -7,3 +7,30 @@ export function userLogin(data){
         data: data
     })
 }
+
+/**
+ * 获取用户信息
+ * @param userId
+ * @returns {AxiosPromise}
+ */
+export function getUserInfo() {
+  return request({
+    url: '/user/info',
+    method: 'get'
+  })
+}
+
+/**
+ * 得到用户关联合约
+ * @param walletAddress
+ * @returns {AxiosPromise}
+ */
+export const getUserRelationContracts= (walletAddress)=>{
+   return request({
+     url: '/user/contract/list',
+     method: 'get',
+     params: {
+       walletAddress: walletAddress
+     }
+   });
+}

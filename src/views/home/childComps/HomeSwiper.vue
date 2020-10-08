@@ -58,11 +58,15 @@
 
 <style scoped>
 
-  .swiper-container {
+  .swiper-content {
     width: 100%;
+    height: 200px;
+  }
+  .swiper-slide{
     height: 200px;
   }
   .swiper-container img{
     width: 100%;
+    height: 100%;
   }
 </style>

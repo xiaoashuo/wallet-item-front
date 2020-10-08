@@ -1,13 +1,34 @@
 <template>
-    <div class="home-list-item">
+    <div class="home-list-item" @click="itemClick">
       <img src="~/assets/logo.png" alt="logo标识">
-      <div>我说列表</div>
+      <div>{{info.contractSymbol}}</div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "HomeListItem"
+        name: "HomeListItem",
+         props:{
+           info:{
+             type: Object,
+             default:  function () {
+                return {}
+             }
+           },
+
+         },
+      methods:{
+        itemClick(){
+          this.$router.push({
+            path:'/detail',
+            query:{
+              address: this.info.contractAddress,
+              name: this.info.contractName,
+              symbol: this.info.contractSymbol
+            }
+          })
+        }
+      }
     }
 </script>
 

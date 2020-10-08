@@ -1,14 +1,14 @@
 <template>
    <div class="nav-bar">
        <div class="nav-bar-left">
-          <slot name="nav-bar-left"></slot>   
-       </div>   
+          <slot name="nav-bar-left"></slot>
+       </div>
        <div class="nav-bar-center">
-          <slot name="nav-bar-center"></slot>   
-       </div>  
+          <slot name="nav-bar-center"></slot>
+       </div>
        <div class="nav-bar-right">
-          <slot name="nav-bar-right"></slot>   
-       </div>   
+          <slot name="nav-bar-right"></slot>
+       </div>
    </div>
 </template>
 <script>
@@ -33,4 +33,5 @@ export default {
   .nav-bar-right{
     flex: 1;
   }
+
 </style>

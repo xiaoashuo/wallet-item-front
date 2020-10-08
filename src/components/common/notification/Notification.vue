@@ -1,9 +1,11 @@
 <template>
     <div class="notification">
 
-      <img src="" alt="">
+      <img src="~/assets/logo.png" alt="">
+      <div class="notification-content"  v-text="message">
 
-      <span class="notification-text" v-text="message">
+      </div>
+      <span class="notification-text">
 
       </span>
 
@@ -16,14 +18,15 @@
       data(){
           return{
             message:"我说中国号",
-            timer: ""
+            timer: null
           }
       },
       methods:{
         show(){
           if(this.timer != null) return;
-          this.timer = setInterval(() => {
-            console.log("开启跑马灯")
+          this.timer = setInterval( ()=>
+
+          {
             //获取到头的第一个字符
             let start = this.message.substring(0,1);
             //获取到后面的所有字符
@@ -33,8 +36,13 @@
           },300)
         },
       },
-      mounted() {
-          this.show()
+
+      activated() {
+        this.show()
+      },
+      deactivated() {
+        clearInterval(this.timer)
+        this.timer=null
       }
     }
 </script>
@@ -49,9 +57,10 @@
 .notification img{
   width: 40px;
   height: 40px;
+  vertical-align:middle;
 }
-.notification-text{
+.notification-content{
+  width: calc(100% - 40px );
   display: inline-block;
-
 }
 </style>
