@@ -36,7 +36,7 @@ export default {
     };
   },
   created(){
-      this.setWalletAddress("0x146d512168d6d0602c19ff63257cdf8cb1811be0")
+
 
 
   },

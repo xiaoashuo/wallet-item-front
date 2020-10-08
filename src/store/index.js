@@ -8,7 +8,9 @@ const state={
     //当前选中钱包地址
     walletAddress: '',
     token: "",
-    userInfo:{}
+    userInfo:{},
+
+
 }
 const getters={
    getCount(state){
@@ -22,7 +24,8 @@ const getters={
    },
    getWalletAddress(state){
      return state.walletAddress
-   }
+   },
+
 }
 const mutations={
     [INCREMENT](state){
@@ -36,7 +39,8 @@ const mutations={
     },
     [SET_TOKEN](state,value){
       state.token=value
-    }
+    },
+
 
 }
 const actions={
@@ -51,7 +55,8 @@ const actions={
     },
     setToken({commit},value){
       commit(SET_TOKEN,value)
-    }
+    },
+
 }
 const debug=process.env.NODE_ENV !== 'production';
 const store=new Vuex.Store({

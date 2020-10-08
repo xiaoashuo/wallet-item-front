@@ -38,6 +38,7 @@
       NavBar,
       ContractItem
     },
+
     data() {
       return {
         contractList: []

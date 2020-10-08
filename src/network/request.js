@@ -1,6 +1,7 @@
 
 import Axios from 'axios'
-
+import {getToken, setToken} from "./auth";
+import router from "../router";
 // function createBaseInstance(){
 //     //1、创建Axios的实例
 //     const instance = Axios.create({
@@ -28,15 +29,20 @@ export  function request(config) {
       // 2. axios拦截器
       //请求拦截器
       instance.interceptors.request.use(config=>{
+
+        if (config.url.indexOf("/user/login")===-1){
+          config.headers.Authorization=getToken()
+        }
         return config;
       },err=>{
-        return Promise.reject(error)
+        return Promise.reject(err)
       });
       //响应拦截器
       instance.interceptors.response.use(res=>{
          return res.data;
       },err=>{
-       return  Promise.reject(error)
+        console.log(err)
+       return  Promise.reject(err)
       });
       //3.发送真正的网络请求
       return instance(config)

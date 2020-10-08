@@ -5,6 +5,7 @@ function resolve(dir) {
 
 module.exports = {
   lintOnSave: false,
+
   devServer:{
     port: 9090,
     open: true,
@@ -25,7 +26,7 @@ module.exports = {
         .set('commonjs', resolve('./src/commonjs'))
         .set('network', resolve('./src/network'))
         .set('views', resolve('./src/views'))
-        
+
   },
-  
+
 };

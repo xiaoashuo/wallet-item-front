@@ -8,10 +8,10 @@
             <img src="~/assets/logo.png" alt="">
           </div>
           <div class="user-info left">
-            <p class="user-info-top" >张三丰</p>
+            <p class="user-info-top" >{{getUserInfo.id}}</p>
             <p>
 
-              <span class="icon-mobile-number">18668389786</span>
+              <span class="icon-mobile-number">{{getUserInfo.username}}</span>
             </p>
           </div>
           <span class="arrow">
@@ -36,6 +36,7 @@ import NavBar from '@/components/common/navbar/NavBar'
 import GridViewList from "./childComps/GridViewList";
 import ProfileLists from "./childComps/ProfileLists";
 import Scroll from "../../components/common/scroll/Scroll";
+import {removeToken} from "../../network/auth";
 export default {
   name: "profile",
   components:{
@@ -50,14 +51,19 @@ export default {
         {logo: '',text:'我的合约',url:'/contract'}],
       gridItems: [
         {logo: '',text:'我的钱包',url:'/wallet/list'}, {logo: '',text:'测试文本',url:''}, {logo: '',text:'测试文本',url:''}
-      ]
+      ],
     };
+  },
+  computed:{
+    getUserInfo(){
+      return this.$store.getters.getUserInfo
+    }
   },
   methods:{
     logout(){
+      removeToken()
       this.$store.dispatch("setWalletAddress",'')
       this.$store.dispatch("setUserInfo",{})
-
       this.$router.push("/login")
     }
   }

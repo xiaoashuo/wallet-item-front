@@ -33,6 +33,7 @@
    import DetailTabContent from "./childComps/DetailTabContent";
    import Scroll from "../../components/common/scroll/Scroll";
 
+   import {getWalletBalance} from "../../network/wallet";
    import {getTransactionList} from "../../network/transaction";
    import {getTokenBalance} from "../../network/token";
    import {mapGetters} from 'vuex'
@@ -97,11 +98,11 @@
         },
         getWalletBalance(){
          const  contractAddress=this.$route.query.address;
-         if (contractAddress==""||contractAddress.length==0){
+         if (contractAddress==null||contractAddress.length==0){
            //执行本币余额查询
            getWalletBalance(this.getWalletAddress).then(res=>{
              if (res.code&&res.code==200){
-               this.balance=res.data
+               this.balance=res.data.balance
              }else{
                this.$toast.showToast("获取余额失败哦",1000)
              }

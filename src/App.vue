@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 import MainTabBar from "@/components/content/maintabbar/MainTabBar"
 export default {
   name: 'App',
@@ -20,23 +21,18 @@ export default {
       cacheView:['home','ContractList','Detail','WalletList']
     }
   },
+
   methods:{
     clickMethod(){
 
     }
   },
+
   computed:{
     isShow(){
-
       return this.$route.path.indexOf('/home')!=-1||this.$route.path.indexOf('/profile')!=-1;
     }
   },
-  created(){
-
-  },
-  mounted(){
-
-  }
 
 }
 </script>

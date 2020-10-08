@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import {getToken} from "../network/auth";
 Vue.use(VueRouter)
 
 const HOME = () => import('@/views/home/home')
@@ -77,5 +77,34 @@ const router = new VueRouter({
   mode: "history",
   routes
 })
+// router.beforeEach((to,from,next)=>{
+//   if (to.path==='/login'){
+//     next()
+//   }else{
+//     const token=getToken();
+//     if (!token){
+//
+//       next('/login')
+//     }else{
+//       next();
+//     }
+//   }
+// })
 
+router.beforeEach((to,from,next)=>{
+  const token=getToken();
+  if (to.path==='/login'){
+    if (token){
+      next('/home')
+    }else{
+      next()
+    }
+  }else{
+    if (!token){
+      next('/login')
+    }else{
+      next();
+    }
+  }
+})
 export default router

@@ -27,6 +27,10 @@
      </div>
 
      </form>
+     <div  class="tips">
+       <p>默认使用22GWEI</p>
+       <p>上限4000000</p>
+     </div>
      <div class="contract-publish-btn">
         <button @click="deployContract">发布合约</button>
      </div>
@@ -126,4 +130,8 @@
   background-color: #03a9f4;
   color: white;
 }
+  .tips{
+    text-align: center;
+    margin-top: 3%;
+  }
 </style>

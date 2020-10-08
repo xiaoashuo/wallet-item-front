@@ -20,8 +20,9 @@
 <script>
 import {userLogin,getUserInfo} from '@/network/user'
 import {isRangeLength,isEmpty} from '@/utils/validation'
+import {setToken} from "../../network/auth";
 import {mapActions} from 'vuex'
-import {SET_WALLET_ADDRESS, SET_USER_INFO, SET_TOKEN} from "../../store/mutation-type";
+import {SET_WALLET_ADDRESS, SET_USER_INFO} from "../../store/mutation-type";
 
 export default {
   name: "Login",
@@ -41,8 +42,12 @@ export default {
   computed:{
 
   },
+  created() {
+    //keepAlive缓存不会
+
+  },
   methods:{
-    ...mapActions([SET_WALLET_ADDRESS,SET_USER_INFO,SET_TOKEN]),
+    ...mapActions([SET_WALLET_ADDRESS,SET_USER_INFO]),
       validateParams(data){
          return isRangeLength(data,5,10)
       },
@@ -63,11 +68,15 @@ export default {
           let _this=this;
 
           const res = await userLogin(form);
-
+          console.log(res)
           if (!res.code||res.code!==200){
-            this.$toast.showToast("用户名或密码不正确",500)
+            this.$toast.showToast(res.msg,500)
             return
           }
+
+          //设置token
+
+          setToken(res.data.token);
           const result=await getUserInfo()
           if (!result.code||result.code!==200){
             this.$toast.showToast(result.msg,500)
@@ -75,8 +84,6 @@ export default {
           }
 
         let wallets=result.data.wallet;
-          //设置token
-        this.setToken(res.data.token);
           //设置钱包地址
         this.setWalletAddress(wallets[0].address)
         //设置用户信息
