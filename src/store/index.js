@@ -6,9 +6,9 @@ Vue.use(Vuex)
 
 const state={
     //当前选中钱包地址
-    walletAddress: '',
-    token: "",
-    userInfo:{},
+    walletAddress: sessionStorage.getItem("walletAddress")?sessionStorage.getItem("walletAddress"):'',
+    token: sessionStorage.getItem("token")?sessionStorage.getItem("token"):'',
+    userInfo: sessionStorage.getItem("userInfo")?JSON.parse(sessionStorage.getItem("userInfo")):{} ,
 
 
 }
@@ -34,7 +34,11 @@ const mutations={
     [SET_TOKEN](state,value){
       state.token=value
     },
-
+  saveState(state){
+     sessionStorage.setItem("walletAddress",state.walletAddress)
+     sessionStorage.setItem("token",state.token)
+     sessionStorage.setItem("userInfo",JSON.stringify(state.userInfo))
+  },
 
 }
 const actions={
@@ -47,10 +51,14 @@ const actions={
     setToken({commit},value){
       commit(SET_TOKEN,value)
     },
+   saveState({commit}){
+     commit("saveState")
+   },
   logout({commit}){
     commit(SET_TOKEN,'')
     commit(SET_WALLET_ADDRESS,'')
     commit(SET_USER_INFO,{})
+    sessionStorage.clear()
   }
 
 }

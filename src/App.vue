@@ -26,6 +26,9 @@ export default {
   methods:{
     clickMethod(){
 
+    },
+    saveState(){
+      this.$store.dispatch("saveState")
     }
   },
 
@@ -34,6 +37,13 @@ export default {
       return this.$route.path.indexOf('/home')!=-1||this.$route.path.indexOf('/profile')!=-1;
     }
   },
+  mounted() {
+
+    window.addEventListener("unload",this.saveState)
+    window.addEventListener("load",function () {
+      sessionStorage.clear()
+    })
+  }
 
 }
 </script>
