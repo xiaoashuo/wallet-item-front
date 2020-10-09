@@ -97,11 +97,13 @@ export default {
         this.setWalletAddress(wallets[0].address)
         //设置用户信息
         this.setUserInfo(result.data.user)
-        this.$toast.showToast("登录成功",500)
-        this.isShow=false
+
+
           setTimeout(function(){
+            this.isShow=false
+         //   _this.$toast.showToast("登录成功",500)
             _this.$router.push("/home")
-          },1500)
+          },1000)
 
 
       }
