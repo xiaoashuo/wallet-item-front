@@ -143,7 +143,12 @@
                  this.transactions[type].isLastPage=result.isLastPage
                  this.transactions[type].pn=result.isLastPage?this.transactions[type].pn:result.pageNum;
                  this.transactions[type].list.push(...result.lists)
-                 this.$refs.scroll.finishPullUp();
+                this.$nextTick(() => {
+                  if (this.$refs.scroll){
+                    this.$refs.scroll.refresh()
+                    this.$refs.scroll.finishPullUp();
+                  }
+                })
 
              }else{
                this.$toast.showToast("获取列表失败哦",1000)
