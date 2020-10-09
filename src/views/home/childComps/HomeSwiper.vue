@@ -1,6 +1,6 @@
 <template>
    <div class="swiper-content">
-    <swiper ref="mySwiper" :options="swiperOptions">
+    <swiper ref="mySwiper" :options="swiperOptions" >
       <swiper-slide   v-for="(banner,index) in banners" :key="index">
         <img :src="banner"/>
       </swiper-slide>
@@ -11,8 +11,7 @@
 </template>
 
 <script>
-    import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-    import 'swiper/swiper-bundle.css'
+
 
     export default {
         name: "HomeSwiper",
@@ -24,14 +23,10 @@
             }
           }
         },
-        components:{
-          Swiper,
-          SwiperSlide
-        },
+
         data(){
           return{
             swiperOptions: {
-
               autoplay: {
                 delay: 2000,
                 disableOnInteraction: false
@@ -51,7 +46,7 @@
         }
       },
       mounted() {
-        this.swiper.slideTo(3, 1000, false)
+       // this.swiper.slideTo(3, 1000, false)
       }
     }
 </script>
