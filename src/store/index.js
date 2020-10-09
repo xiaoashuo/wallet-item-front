@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {INCREMENT, SET_TOKEN, SET_USER_INFO, SET_WALLET_ADDRESS} from './mutation-type'
+import {removeToken} from "../network/auth";
 Vue.use(Vuex)
 
 const state={
-    count: 0,
     //当前选中钱包地址
     walletAddress: '',
     token: "",
@@ -13,9 +13,6 @@ const state={
 
 }
 const getters={
-   getCount(state){
-       return state.count
-   },
    getUserInfo(state){
      return state.userInfo
    },
@@ -28,9 +25,6 @@ const getters={
 
 }
 const mutations={
-    [INCREMENT](state){
-        return state.count++
-    },
     [SET_WALLET_ADDRESS](state,value){
        state.walletAddress=value
     },
@@ -44,9 +38,6 @@ const mutations={
 
 }
 const actions={
-    increment(context){
-        context.commit(INCREMENT)
-    },
     [SET_WALLET_ADDRESS]({commit},walletAddress){
        commit(SET_WALLET_ADDRESS,walletAddress)
     },
@@ -56,6 +47,11 @@ const actions={
     setToken({commit},value){
       commit(SET_TOKEN,value)
     },
+  logout({commit}){
+    commit(SET_TOKEN,'')
+    commit(SET_WALLET_ADDRESS,'')
+    commit(SET_USER_INFO,{})
+  }
 
 }
 const debug=process.env.NODE_ENV !== 'production';

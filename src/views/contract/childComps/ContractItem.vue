@@ -4,6 +4,7 @@
       <p class="contract-item-name">{{item.name}}</p>
       <p class="contract-item-symbol">{{item.symbol}}</p>
       <p class="contract-item-supply">{{item.totalSupply}}</p>
+      <p class="contract-item-status">{{getStatus}}</p>
     </div>
 </template>
 
@@ -17,7 +18,25 @@
               return {}
             }
           }
-        }
+        },
+      computed:{
+          getStatus(){
+            let status;
+            switch (this.item.status) {
+              case 1:
+                status="成功"
+                break
+              case 2:
+                status="失败"
+                break
+              default:
+                status="部署中"
+                break
+            }
+
+            return status;
+          }
+      }
     }
 </script>
 
@@ -26,15 +45,8 @@
     margin-top: 5%;
     display: flex;
 
+
+    justify-content: space-between;
   }
-  .contract-item-name{
-    margin-left: 3%;
-    flex: 1;
-  }
-  .contract-item-symbol{
-    flex: 2;
-  }
-  .contract-item-supply{
-    flex: 1;
-  }
+
 </style>

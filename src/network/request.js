@@ -1,7 +1,8 @@
 
 import Axios from 'axios'
-import {getToken, setToken} from "./auth";
+import {getToken, logout} from "./auth";
 import router from "../router";
+
 // function createBaseInstance(){
 //     //1、创建Axios的实例
 //     const instance = Axios.create({
@@ -39,7 +40,14 @@ export  function request(config) {
       });
       //响应拦截器
       instance.interceptors.response.use(res=>{
-         return res.data;
+         const  result=res.data;
+         if (result.code && result.code==1001){
+           logout()
+           router.replace({
+             path: '/login',
+           })
+         }
+         return result;
       },err=>{
         console.log(err)
        return  Promise.reject(err)
@@ -49,35 +57,32 @@ export  function request(config) {
 }
 
 
-//  export const get = (url,params)=>{
-//   params = params || {};
-//   return new Promise((resolve,reject)=>{
-//       // axiso 自带 get 和 post 方法
-//       $http.get(url,{
-//           params,
-//       }).then(res=>{
-//           if(res.data.status===0){
-//               resolve(res.data);
-//           }else{
-//               alert(res.data.msg)
-//           }
-//       }).catch(error=>{
-//           alert('网络异常');
-//       })
-//   })
-// }
+export function fetchPost(url, params) {
+  return new Promise((resolve, reject) => {
+    Axios.post(url, params)
+      .then(response => {
+        resolve(response.data);
+      }, err => {
+        reject(err);
+      })
+      .catch((error) => {
+        reject(error)
+      })
+  })
+}
 
-// export const post = (url,params)=>{
-//   params = params || {};
-//   return new Promise((resolve,reject)=>{
-//       $http.post(url,params).then(res=>{
-//           if(res.data.status===0){
-//               resolve(res.data);
-//           }else{
-//               alert(res.data.msg);
-//           }
-//       }).catch(error=>{
-//           alert('网络异常');
-//       })
-//   })
-// }
+export function fetchGet(url, param) {
+  return new Promise((resolve, reject) => {
+    Axios.get(url, {
+      params: param
+    })
+      .then(response => {
+        resolve(response.data)
+      }, err => {
+        reject(err)
+      })
+      .catch((error) => {
+        reject(error)
+      })
+  })
+}

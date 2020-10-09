@@ -11,3 +11,7 @@ export function getToken(){
 export function removeToken() {
   store.dispatch("setToken","")
 }
+
+export function logout() {
+  store.dispatch("logout")
+}

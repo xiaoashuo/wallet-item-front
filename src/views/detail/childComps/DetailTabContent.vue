@@ -1,31 +1,59 @@
 <template>
-   <div class="transactions">
 
-          <detail-transfer-list-item v-for="(item,index) in infos" :key="index"></detail-transfer-list-item>
+     <div class="transfer-list-item "  >
+       <div class="transfer-list-item-left ">
+         <img src="~/assets/logo.png" alt="">
+       </div>
+
+       <div class="transfer-list-item-center  ">
+         <p>{{getToAddress | addressFormat}}</p>
+         <p>{{item.gmt_create}}</p>
+       </div>
+       <div class="transfer-list-item-right  ">
+         <p >{{item.amount}}</p>
+       </div>
+     </div>
 
 
-   </div>
+
 </template>
 
 <script>
-  import DetailTransferListItem from "../../../components/content/detail/DetailTransferListItem";
+
     export default {
         name: "DetailTabContent",
       props:{
-        infos:{
-          type: Array,
+        item:{
+          type: Object,
           default(){
-            return []
+            return {}
           }
         }
       },
-        components:{
-
-          DetailTransferListItem
-        }
+      computed:{
+          getToAddress(){
+            const walletAddress=this.$store.getters.getWalletAddress;
+            return walletAddress==this.item.toAddress?this.item.fromAddress:this.item.toAddress;
+          }
+      }
     }
 </script>
 
 <style scoped>
+  .transfer-list-item{
+    width: 100%;
+    height: 40px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    display:flex;
+    justify-content: space-around;
+  }
+  .transfer-list-item-left{
 
+  }
+  .transfer-list-item-left img{
+
+    width: 40px;
+    height: 40px;
+  }
 </style>

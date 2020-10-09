@@ -12,6 +12,7 @@
       <p>代币名称</p>
       <p>标志</p>
       <p>发型量</p>
+      <p>状态</p>
     </div>
 
     <div class="empty-contract" v-if="isEmptyContracts"> 合约列表为空</div>

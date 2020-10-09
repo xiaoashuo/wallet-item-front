@@ -91,6 +91,7 @@
               formData.append("fromAddress",walletAddress)
               formData.append("toAddress",this.transferAddress)
               formData.append("amount",this.transferVal)
+              formData.append("gasPrice",this.minerFee)
               const res =await transferMoney(formData);
               if (res.code &&res.code===200){
                 console.log(res)
@@ -101,7 +102,20 @@
               }
             }  else{
               //执行代币转账
-
+              const formData = new FormData();
+              formData.append("fromAddress",walletAddress)
+              formData.append("contractAddress",contractAddress)
+              formData.append("toAddress",this.transferAddress)
+              formData.append("amount",this.transferVal)
+              formData.append("gasPrice",this.minerFee)
+              const res=await transferTokenMoney(formData)
+              if (res.code &&res.code===200){
+                console.log(res)
+                this.$toast.showToast("转账已发起")
+                this.$router.back()
+              }else{
+                this.$toast.showToast(res.msg)
+              }
             }
           }
         }

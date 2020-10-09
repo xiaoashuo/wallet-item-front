@@ -18,7 +18,9 @@
 
       <tab-control :titles="['全部','转出','转入','失败']" @tab-click="itemClick"></tab-control>
       <scroll @pullingUp="loadMore" :pull-up-load="true" class="content" ref="scroll">
-        <detail-tab-content :infos="showTransactions"></detail-tab-content>
+
+        <detail-tab-content  v-for="(item,index) in showTransactions" :key="item.id" :item="item"></detail-tab-content>
+
       </scroll>
         <div class="detail-footer">
           <detail-bottom-bar @bottom-click="btnItemClick"></detail-bottom-bar>
@@ -131,7 +133,7 @@
           }
           const data={}
           data.pageNum=this.transactions[type].pn
-          data.pageSize=4
+          data.pageSize=10
           data.address=this.getWalletAddress;
           data.contractAddress=this.$route.query.address;
           data.optionType=this.getOptionType(type)

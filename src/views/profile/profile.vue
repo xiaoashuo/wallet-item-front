@@ -62,10 +62,8 @@ export default {
   },
   methods:{
     logout(){
-      removeToken()
-      this.$store.dispatch("setWalletAddress",'')
-      this.$store.dispatch("setUserInfo",{})
 
+     this.$store.dispatch("logout")
     //  location.reload()
       this.$router.push("/login")
     }

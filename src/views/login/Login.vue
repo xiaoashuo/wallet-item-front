@@ -14,10 +14,11 @@
            <button>登录</button>
          </div>
        </div>
-
+     <loading :show="isShow"></loading>
    </div>
 </template>
 <script>
+  import loading from "../../components/common/loading/loading";
 import {userLogin,getUserInfo} from '@/network/user'
 import {isRangeLength,isEmpty} from '@/utils/validation'
 import {setToken} from "../../network/auth";
@@ -30,8 +31,12 @@ export default {
   data () {
     return {
       username: "",
-      password: ""
+      password: "",
+      isShow: false
     };
+  },
+  components:{
+    loading
   },
   directives:{
      focus:{
@@ -43,16 +48,19 @@ export default {
   computed:{
 
   },
+
   created() {
     //keepAlive缓存不会
 
   },
+
   methods:{
     ...mapActions([SET_WALLET_ADDRESS,SET_USER_INFO]),
       validateParams(data){
          return isRangeLength(data,5,10)
       },
       async startLogin(){
+          this.isShow=true
           if(isEmpty(this.username)||isEmpty(this.password)){
               this.$toast.showToast('用户名或密码不能为空',500)
               return;
@@ -90,7 +98,7 @@ export default {
         //设置用户信息
         this.setUserInfo(result.data.user)
         this.$toast.showToast("登录成功",500)
-
+        this.isShow=false
           setTimeout(function(){
             _this.$router.push("/home")
           },1500)

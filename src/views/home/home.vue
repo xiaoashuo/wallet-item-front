@@ -1,7 +1,11 @@
 <template>
    <div id="home">
           <nav-bar class="home-nav-bar">
-              <div slot="nav-bar-center">首页</div>
+            <div slot="nav-bar-left" @click="showLeftMenu">
+              <img  style="width: 40px;height: 40px" src="~assets/img/menu.jpg" alt="">
+            </div>
+
+            <div slot="nav-bar-center">首页</div>
           </nav-bar>
           <home-swiper :banners="banners"></home-swiper>
           <notification></notification>
@@ -9,9 +13,16 @@
           <home-lists></home-lists>
      </scroll>
 
+     <!--遮罩层组件-->
+     <mask-layer :show="mask"></mask-layer>
+     <!--左侧菜单组件-->
+     <menu-left @closeLeftMenu="closeLeftMenu" :show="menu.show" :list="menu.list"></menu-left>
    </div>
+
 </template>
 <script>
+  import MaskLayer from "../../components/common/menuleft/MaskLayer";
+import MenuLeft from "../../components/common/menuleft/MenuLeft";
 import Scroll from "../../components/common/scroll/Scroll";
 import NavBar from '@/components/common/navbar/NavBar'
 import Notification from "../../components/common/notification/Notification";
@@ -27,12 +38,19 @@ export default {
       HomeSwiper,
       HomeLists,
     Notification,
-    Scroll
+    Scroll,
+    MenuLeft,
+    MaskLayer
+
   },
   data () {
     return {
         banners: [ require('@/assets/img/img1.jpg'),require('@/assets/img/img2.jpg'), require('@/assets/img/img3.jpg') ],
-
+      mask:false,
+      menu:{
+        show:false,
+        list:[]
+      },
     };
   },
   created(){
@@ -52,7 +70,15 @@ export default {
        ...mapActions([SET_WALLET_ADDRESS]),
       	iconURL(item) {
 				return require('@/assets/img/' + item.icon)
-      }
+      },
+    closeLeftMenu(){
+      this.menu.show = false
+      this.mask = false
+    },
+    showLeftMenu(){
+      this.menu.show = true
+      this.mask = true
+    }
   }
 }
 </script>

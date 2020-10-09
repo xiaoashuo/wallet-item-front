@@ -40,7 +40,7 @@ export function transferMoney(data) {
  */
 export function transferTokenMoney(data) {
   return request({
-    url: '',
+    url: '/token/send',
     method: 'post',
     data: data
   })
