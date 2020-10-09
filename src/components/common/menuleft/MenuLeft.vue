@@ -8,7 +8,7 @@
 
     <ul class="sf-list clearfix">
 
-      <li>首页</li>
+      <li>选择钱包</li>
 
     </ul>
 
