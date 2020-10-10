@@ -66,10 +66,7 @@ const routes = [
     component: WALLET_DETAIL
 
   },
-  {
-    path: "/test",
-    component: () => import('@/views/Test')
-  },
+
   {
     path: '*',
     name: 'NOTFOUND',

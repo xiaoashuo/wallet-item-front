@@ -60,7 +60,7 @@ export default {
          return isRangeLength(data,5,10)
       },
       async startLogin(){
-          this.isShow=true
+
           if(isEmpty(this.username)||isEmpty(this.password)){
               this.$toast.showToast('用户名或密码不能为空',500)
               return;
@@ -70,7 +70,7 @@ export default {
               this.$toast.showToast('用户名或密码必须在5-10位',500)
               return ;
          }
-
+         this.isShow=true
          const form = new FormData()
          form.append("username",this.username);
          form.append("password",this.password)
@@ -80,6 +80,7 @@ export default {
           console.log(res)
           if (!res.code||res.code!==200){
             this.$toast.showToast(res.msg,500)
+            this.isShow=false
             return
           }
 
@@ -89,6 +90,7 @@ export default {
           const result=await getUserInfo()
           if (!result.code||result.code!==200){
             this.$toast.showToast(result.msg,500)
+            this.isShow=false
             return
           }
 
