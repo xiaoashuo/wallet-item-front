@@ -2,7 +2,7 @@
   <div id="home">
     <nav-bar class="home-nav-bar">
       <div slot="nav-bar-left" @click="showLeftMenu">
-        <img style="width: 40px;height: 40px" src="~assets/img/menu.jpg" alt="">
+        <img style="width: 40px;height: 40px" src="~assets/img/menu.png" alt="">
       </div>
 
       <div slot="nav-bar-center">首页</div>

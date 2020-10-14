@@ -11,6 +11,7 @@ const state={
     userInfo: sessionStorage.getItem("userInfo")?JSON.parse(sessionStorage.getItem("userInfo")):{} ,
 
 
+
 }
 const getters={
    getUserInfo(state){
@@ -22,6 +23,7 @@ const getters={
    getWalletAddress(state){
      return state.walletAddress
    },
+
 
 }
 const mutations={
@@ -39,6 +41,7 @@ const mutations={
      sessionStorage.setItem("token",state.token)
      sessionStorage.setItem("userInfo",JSON.stringify(state.userInfo))
   },
+
 
 }
 const actions={

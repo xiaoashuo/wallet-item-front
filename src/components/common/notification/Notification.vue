@@ -36,7 +36,13 @@
           },300)
         },
       },
-
+     created() {
+       this.show()
+     },
+      destroyed() {
+        clearInterval(this.timer)
+        this.timer=null
+      },
       activated() {
         this.show()
       },

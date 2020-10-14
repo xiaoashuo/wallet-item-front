@@ -1,8 +1,16 @@
 <template>
   <div id="app">
-     <keep-alive :include="cacheView">
+<!--    <template v-if="$store.getters.getRefresh">-->
+<!--      <keep-alive :include="cacheView">-->
+<!--        <router-view/>-->
+<!--      </keep-alive>-->
+<!--    </template>-->
+<!--    <template v-if="!$store.getters.getRefresh">-->
+<!--      <router-view/>-->
+<!--    </template>-->
+    <keep-alive :include="cacheView">
       <router-view/>
-     </keep-alive>
+    </keep-alive>
 
      <main-tab-bar v-show="isShow" ></main-tab-bar>
   </div>
@@ -11,6 +19,7 @@
 <script>
 
 import MainTabBar from "@/components/content/maintabbar/MainTabBar"
+import {WebSocketUtil} from "./utils/WebSocketUtil";
 
 export default {
   name: 'App',
@@ -22,7 +31,10 @@ export default {
       cacheView:[]
     }
   },
-
+created() {
+    var webSocketUtil = new WebSocketUtil();
+    webSocketUtil.initWebSocket("ws://127.0.0.1:9001/ws?token=111")
+},
   methods:{
     clickMethod(){
 
@@ -38,7 +50,6 @@ export default {
     }
   },
   mounted() {
-
     window.addEventListener("unload",this.saveState)
     window.addEventListener("load",function () {
       sessionStorage.clear()

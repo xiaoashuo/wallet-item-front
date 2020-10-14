@@ -20,6 +20,7 @@ import router from "../router";
 //     timeout: 10000
 // })
 export  function request(config) {
+
       //1.创建axios实列
   const instance = Axios.create({
     //公共url前缀(接口)

@@ -2,7 +2,7 @@ import Toast from './Toast'
 
 const obj={}
 obj.install=function(Vue){
-   //1.创建组件构造器
+  //1.创建组件构造器
    const toastConstructor=Vue.extend(Toast)
    //2.new 方式根据组件构造器创建出来一个组件对象
    const toast=new toastConstructor
