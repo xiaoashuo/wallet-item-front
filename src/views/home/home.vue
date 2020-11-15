@@ -1,8 +1,8 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav-bar">
-      <div slot="nav-bar-left" @click="showLeftMenu">
-        <img style="width: 40px;height: 40px" src="~assets/img/menu.png" alt="">
+      <div @click="showLeftMenu" slot="nav-bar-left">
+        <img alt="" src="~assets/img/menu.png" style="width: 40px;height: 40px">
       </div>
 
       <div slot="nav-bar-center">首页</div>
@@ -10,29 +10,27 @@
     <home-swiper :banners="banners"></home-swiper>
     <notification></notification>
     <scroll class="content" ref="myScroll">
-      <home-list-item v-for="(contract,index) in contracts" :info="contract" :key="index"></home-list-item>
+      <home-list-item :info="contract" :key="index" v-for="(contract,index) in contracts"></home-list-item>
     </scroll>
 
     <!--遮罩层组件-->
     <mask-layer :show="mask"></mask-layer>
     <!--左侧菜单组件-->
-    <menu-left @closeLeftMenu="closeLeftMenu" :show="menu.show" :list="menu.list"></menu-left>
+    <menu-left :list="menu.list" :show="menu.show" @closeLeftMenu="closeLeftMenu"></menu-left>
   </div>
 
 </template>
 <script>
-  import MaskLayer from "../../components/common/menuleft/MaskLayer";
-  import MenuLeft from "../../components/common/menuleft/MenuLeft";
-  import Scroll from "../../components/common/scroll/Scroll";
+  import MaskLayer from "@/components/common/menuleft/MaskLayer";
+  import MenuLeft from "@/components/common/menuleft/MenuLeft";
+  import Scroll from "@/components/common/scroll/Scroll";
   import NavBar from '@/components/common/navbar/NavBar'
-  import Notification from "../../components/common/notification/Notification";
+  import Notification from "@/components/common/notification/Notification";
   import HomeSwiper from "./childComps/HomeSwiper";
 
   import HomeListItem from "../../components/content/homelist/HomeListItem";
   import {SET_WALLET_ADDRESS} from "../../store/mutation-type";
-  import {mapActions} from 'vuex'
-
-  import {mapGetters} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
   import {getUserRelationContracts} from '@/network/user'
 
   export default {
@@ -61,7 +59,6 @@
     },
     created() {
       this.getUserRelationContract();
-
 
     },
 

@@ -1,12 +1,13 @@
 import {request} from './request'
 
-export function userLogin(data){
-  return  request({
-        url: "/user/login",
-        method: "post",
-        data: data
-    })
+export function userLogin(data) {
+  return request({
+    url: "/user/login",
+    method: "post",
+    data: data
+  })
 }
+
 
 /**
  * 获取用户信息
@@ -25,13 +26,19 @@ export function getUserInfo() {
  * @param walletAddress
  * @returns {AxiosPromise}
  */
-export const getUserRelationContracts= (walletAddress)=>{
-   return request({
-     url: '/user/contract/list',
-     method: 'get',
-     params: {
-       walletAddress: walletAddress
-     }
-   });
+export const getUserRelationContracts = (walletAddress) => {
+  return request({
+    url: '/user/contract/list',
+    method: 'get',
+    params: {
+      walletAddress: walletAddress
+    }
+  });
+}
+export const userLogout=()=>{
+  return request({
+    url: '/user/logout',
+    method: 'get'
+  })
 }
 

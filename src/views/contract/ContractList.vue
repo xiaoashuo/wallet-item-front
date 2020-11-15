@@ -1,10 +1,10 @@
 <template>
   <div class="contract-list">
     <nav-bar>
-      <div slot="nav-bar-left" class="back" @click="$router.back()">
-        <img src="@/assets/img/common/back.svg" alt="">
+      <div @click="$router.back()" class="back" slot="nav-bar-left">
+        <img alt="" src="@/assets/img/common/back.svg">
       </div>
-      <div slot="nav-bar-center" class="title">
+      <div class="title" slot="nav-bar-center">
         合约列表
       </div>
     </nav-bar>
@@ -17,7 +17,7 @@
 
     <div class="empty-contract" v-if="isEmptyContracts"> 合约列表为空</div>
     <scroll :pull-up-load="true" @pullingUp="itemPull" class="content" v-else>
-      <contract-item v-for="(item,index) in contractList" :key="index" :item="item"></contract-item>
+      <contract-item :item="item" :key="index" v-for="(item,index) in contractList"></contract-item>
 
     </scroll>
 

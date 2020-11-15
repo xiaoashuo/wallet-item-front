@@ -1,10 +1,10 @@
 <template>
   <div class="detail">
     <nav-bar>
-      <div slot="nav-bar-left" class="back" @click="backClick">
-        <img src="@/assets/img/common/back.svg" alt="">
+      <div @click="backClick" class="back" slot="nav-bar-left">
+        <img alt="" src="@/assets/img/common/back.svg">
       </div>
-      <div slot="nav-bar-center" class="title">
+      <div class="title" slot="nav-bar-center">
         {{$route.query.symbol}}
       </div>
     </nav-bar>
@@ -17,9 +17,9 @@
     <hr class="horizontal"/>
 
     <tab-control :titles="['全部','转出','转入','失败']" @tab-click="itemClick"></tab-control>
-    <scroll @pullingUp="loadMore" :pull-up-load="true" class="content" ref="scroll">
+    <scroll :pull-up-load="true" @pullingUp="loadMore" class="content" ref="scroll">
 
-      <detail-tab-content v-for="(item,index) in showTransactions" :key="item.id" :item="item"></detail-tab-content>
+      <detail-tab-content :item="item" :key="item.id" v-for="(item,index) in showTransactions"></detail-tab-content>
 
     </scroll>
     <div class="detail-footer">

@@ -6,15 +6,15 @@
     width: 100%;
     height: 100%;
     z-index: 999;
-    background: rgba(0,0,0,.6);
+    background: rgba(0, 0, 0, .6);
   }
 </style>
 <template>
-  <div id="BP_Mask" class="ui-mask" v-show="show"></div>
+  <div class="ui-mask" id="BP_Mask" v-show="show"></div>
 </template>
 <script>
   export default {
     name: "MaskLayer",
-    props:['show']
+    props: ['show']
   }
 </script>

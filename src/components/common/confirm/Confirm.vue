@@ -4,17 +4,17 @@
       <div class="confirm">
         <div class="hd">
           {{title}}
-          <i class="btn-close iconfont icon-close" @click="handleAction('close')"></i>
+          <i @click="handleAction('close')" class="btn-close iconfont icon-close"></i>
         </div>
         <div class="bd">
-          <i v-if="type!=''" class="icon-type iconfont" :class="'icon-'+type"></i>{{content}}
+          <i :class="'icon-'+type" class="icon-type iconfont" v-if="type!=''"></i>{{content}}
         </div>
         <div class="ft">
-          <a href="javscript:void(0)" class="btn btn-primary" @click="handleAction('yes')">{{yesBtnText}}</a>
-          <a href="javscript:void(0)" class="btn btn-default" @click="handleAction('cancel')">{{cancelBtnText}}</a>
+          <a @click="handleAction('yes')" class="btn btn-primary" href="javscript:void(0)">{{yesBtnText}}</a>
+          <a @click="handleAction('cancel')" class="btn btn-default" href="javscript:void(0)">{{cancelBtnText}}</a>
         </div>
       </div>
-      <div class="backdrop" @click="handleAction('close')"></div>
+      <div @click="handleAction('close')" class="backdrop"></div>
     </div>
   </transition>
 </template>
@@ -24,20 +24,20 @@
     name: "Confirm",
     data() {
       return {
-        visible:false,
-        title:'',
-        content:'',
-        yesBtnText:'确定',
-        cancelBtnText:'取消',
-        type:'',
-        promiseStatus:null,
+        visible: false,
+        title: '',
+        content: '',
+        yesBtnText: '确定',
+        cancelBtnText: '取消',
+        type: '',
+        promiseStatus: null,
       }
     },
-    watch:{
-      visible:function(curVal) {
-        if(curVal&&document.body.scrollHeight > window.innerHeight){
+    watch: {
+      visible: function (curVal) {
+        if (curVal && document.body.scrollHeight > window.innerHeight) {
           $('body').addClass('backdrop-open');
-        }else{
+        } else {
           $('body').removeClass('backdrop-open');
         }
       }
@@ -50,11 +50,11 @@
           _this.promiseStatus = {resolve, reject};
         });
       },
-      handleAction(action){
-        this.visible=false;
-        if(action=='yes'){
+      handleAction(action) {
+        this.visible = false;
+        if (action == 'yes') {
           this.promiseStatus && this.promiseStatus.resolve();
-        }else{
+        } else {
           this.promiseStatus && this.promiseStatus.reject();
         }
       }

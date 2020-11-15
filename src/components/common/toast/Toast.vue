@@ -1,28 +1,28 @@
 <template>
-   <div id="toast" v-show="isShowMessage">
-        <div class="msg">{{showMessage}}</div>
-   </div>
+  <div id="toast" v-show="isShowMessage">
+    <div class="msg">{{showMessage}}</div>
+  </div>
 </template>
 <script>
-export default {
-  name: "Toast",
-  data () {
-    return {
+  export default {
+    name: "Toast",
+    data() {
+      return {
         showMessage: '',
         isShowMessage: false
-    };
-  },
-  methods:{
-      showToast(message='请传入信息',duration=500){
-          this.isShowMessage=true;
-          this.showMessage=message;
-          setTimeout(()=>{
-             this.isShowMessage=false;
-             this.showMessage='';
-          },duration)
+      };
+    },
+    methods: {
+      showToast(message = '请传入信息', duration = 500) {
+        this.isShowMessage = true;
+        this.showMessage = message;
+        setTimeout(() => {
+          this.isShowMessage = false;
+          this.showMessage = '';
+        }, duration)
       }
+    }
   }
-}
 </script>
 <style scoped>
   #toast {

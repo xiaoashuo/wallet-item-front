@@ -1,13 +1,13 @@
 <template>
-    <div class="profile-list">
-      <slot></slot>
-    </div>
+  <div class="profile-list">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "ProfileList"
-    }
+  export default {
+    name: "ProfileList"
+  }
 </script>
 
 <style scoped>

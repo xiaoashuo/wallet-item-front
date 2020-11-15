@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Confirm from './Confirm.vue'
-import Toast from "../toast/Toast";
 
 const ConfirmBox = Vue.extend(Confirm);
 

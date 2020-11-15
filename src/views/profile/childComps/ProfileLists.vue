@@ -1,8 +1,8 @@
 <template>
   <div class="profile-list">
     <profile-list>
-      <profile-list-item v-for="(item,index) in profileList"
-                         :key="index" :text="item.text" @click.native="itemClick(item)"></profile-list-item>
+      <profile-list-item :key="index"
+                         :text="item.text" @click.native="itemClick(item)" v-for="(item,index) in profileList"></profile-list-item>
     </profile-list>
   </div>
 </template>

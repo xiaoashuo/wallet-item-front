@@ -1,16 +1,16 @@
 <template>
   <div class="collect-money">
     <nav-bar>
-      <div slot="nav-bar-left" class="back" @click="backClick">
-        <img src="@/assets/img/common/back.svg" alt="">
+      <div @click="backClick" class="back" slot="nav-bar-left">
+        <img alt="" src="@/assets/img/common/back.svg">
       </div>
-      <div slot="nav-bar-center" class="title">
+      <div class="title" slot="nav-bar-center">
         收款
       </div>
     </nav-bar>
     <div class="qr-data">
       <div class="qr-address-code">
-        <vue-qr :text="text" :size="200"></vue-qr>
+        <vue-qr :size="200" :text="text"></vue-qr>
       </div>
       <div class="qr-text">
         <p class="qr-text-label">钱包地址</p>

@@ -1,27 +1,27 @@
 <template>
   <div class="bottom-bar">
-     <div class="left tips">
-       <img src="~/assets/img/smile.jpg" alt="">
-     </div>
+    <div class="left tips">
+      <img alt="" src="~/assets/img/smile.jpg">
+    </div>
     <div class="center">
-      <button class="btn-common btn-collect" @click="itemClick(1)">收款</button>
+      <button @click="itemClick(1)" class="btn-common btn-collect">收款</button>
     </div>
     <div class="right">
-      <button class="btn-common btn-transfer"  @click="itemClick(2)">转账</button>
+      <button @click="itemClick(2)" class="btn-common btn-transfer">转账</button>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "DetailBottomBar",
-      methods:{
-          itemClick(index){
-            this.$emit("bottom-click",index)
-          }
+  export default {
+    name: "DetailBottomBar",
+    methods: {
+      itemClick(index) {
+        this.$emit("bottom-click", index)
       }
-
     }
+
+  }
 </script>
 
 <style scoped>
@@ -45,13 +45,14 @@
     padding-top: 5%;
 
   }
-  .bottom-bar .center ,.bottom-bar .right {
+
+  .bottom-bar .center, .bottom-bar .right {
     height: 55px;
     flex: 2;
     padding-top: 5%;
   }
 
-  .btn-common{
+  .btn-common {
 
     outline: none;
     width: 95%;
@@ -60,16 +61,20 @@
     border: none;
     color: white;
   }
-  .btn-collect{
+
+  .btn-collect {
     background-color: #8c9eff;
   }
-  .btn-transfer{
+
+  .btn-transfer {
     background-color: #5677fc;
   }
-  .tips{
+
+  .tips {
     color: darkgray;
   }
-  .tips img{
+
+  .tips img {
     width: 35px;
     height: 35px;
   }

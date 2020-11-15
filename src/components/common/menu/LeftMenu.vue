@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <div class="menu-list" :class="{'show': show}">
+    <div :class="{'show': show}" class="menu-list">
       <div class="menu-header">
 
         <div class="menu-title">Ces</div>
@@ -17,16 +17,15 @@
 
 <script>
 
-  export default
-    {
-      name: 'LeftMenu',
-      props: {
-        show: {
-          type: Boolean
-        }
-      },
+  export default {
+    name: 'LeftMenu',
+    props: {
+      show: {
+        type: Boolean
+      }
+    },
 
-    };
+  };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import 'menu.styl';

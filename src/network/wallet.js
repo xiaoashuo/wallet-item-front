@@ -1,13 +1,13 @@
 import {request} from "./request";
 
 export function getWalletBalance(address) {
-   return request({
-     url: '/wallet/balance',
-     method: 'get',
-     params:{
-       address: address
-     }
-   })
+  return request({
+    url: '/wallet/balance',
+    method: 'get',
+    params: {
+      address: address
+    }
+  })
 }
 
 /**
@@ -15,10 +15,10 @@ export function getWalletBalance(address) {
  * @returns {AxiosPromise}
  */
 export function getWalletList() {
-     return request({
-       url: '/wallet',
-       method: 'get'
-     })
+  return request({
+    url: '/wallet',
+    method: 'get'
+  })
 }
 
 /**

@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@better-scroll/core": "^2.0.4",
-    "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "swiper": "^6.3.2",
     "vue": "^2.6.11",
@@ -21,6 +20,7 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "axios": "^0.20.0",
     "babel-eslint": "^10.1.0",
     "better-scroll": "^2.0.4",
     "date-fns": "^2.16.1",

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {getToken} from "../network/auth";
+
 Vue.use(VueRouter)
 
 const HOME = () => import('@/views/home/home')
@@ -95,22 +96,23 @@ const createRouter = () => new VueRouter({
 })
 const router = createRouter()
 
-export function resetRouter () {
+export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // the relevant part
 }
-router.beforeEach((to,from,next)=>{
-  const token=getToken();
-  if (to.path==='/login'){
-    if (token){
+
+router.beforeEach((to, from, next) => {
+  const token = getToken();
+  if (to.path === '/login') {
+    if (token) {
       next('/home')
-    }else{
+    } else {
       next()
     }
-  }else{
-    if (!token){
+  } else {
+    if (!token) {
       next('/login')
-    }else{
+    } else {
       next();
     }
   }

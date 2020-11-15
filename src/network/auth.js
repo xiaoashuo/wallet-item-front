@@ -1,15 +1,15 @@
 import store from "../store";
 
 export function setToken(token) {
-  store.dispatch("setToken",token)
+  store.dispatch("setToken", token)
 }
 
-export function getToken(){
+export function getToken() {
   return store.getters.getToken;
 }
 
 export function removeToken() {
-  store.dispatch("setToken","")
+  store.dispatch("setToken", "")
 }
 
 export function logout() {
